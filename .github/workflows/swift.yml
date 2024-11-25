@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: swift build -c release -v
     - name: Compress archive
-      run: tar -czf ${{ github.ref_name }}.tar.gz -C .build/release
+      run: tar -czf ${{ github.ref_name }}.tar.gz -C .build/release .
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
