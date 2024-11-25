@@ -22,8 +22,11 @@ jobs:
     - name: Build
       run: swift build -c release -v
     - name: Compress archive
+      if: startsWith(github.ref, 'refs/tags/')  # 仅在推送标签时压缩归档
       run: tar -czf ${{ github.ref_name }}.tar.gz -C .build/release .
     - name: Release
+      if: startsWith(github.ref, 'refs/tags/')  # 仅在推送标签时执行 Release
       uses: softprops/action-gh-release@v1
       with:
         files: ${{ github.ref_name }}.tar.gz
+        token: ${{ secrets.GITHUB_TOKEN }}
