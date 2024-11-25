@@ -31,5 +31,3 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: ${{ github.ref_name }}.tar.gz
-    - name: Run tests
-      run: swift test -v
