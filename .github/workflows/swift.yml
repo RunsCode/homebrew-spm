@@ -19,11 +19,15 @@ jobs:
       contents: write
     steps:
     - uses: actions/checkout@v4
+    - name: Set up Swift
+      uses: fwal/setup-swift@v2
+      with:
+        swift-version: '5.5' # 指定 Swift 版本，可以根据项目需要调整
     - name: Build
-      run: swift build -c release
+      run: swift build -c release -v
     - name: Compress archive
-      run: tar -czf ${{ github.ref_name }}.tar.gz -C .build/release/spm
-    - name: Relese
+      run: tar -czf ${{ github.ref_name }}.tar.gz -C .build/release
+    - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: ${{ github.ref_name }}.tar.gz
